@@ -6,7 +6,7 @@
 
 **Transform your ideas into complete technical documentation with an immersive motherboard experience**
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-brightgreen?style=for-the-badge)](https://kingpin-l9y7bp5vr-nodaysidle.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-brightgreen?style=for-the-badge)](https://kingpin-six.vercel.app)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
 </div>
