@@ -1,0 +1,383 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #000;
+    color: #d4af37;
+}
+
+/* ============================================
+   CIRCUIT TRACE ANIMATIONS
+   ============================================ */
+
+.trace-animate {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: trace-draw 2s ease-in-out forwards;
+}
+
+@keyframes trace-draw {
+    0% {
+        stroke-dashoffset: 1000;
+        stroke-opacity: 0.3;
+    }
+
+    50% {
+        stroke-opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        stroke-opacity: 1;
+    }
+}
+
+.trace-active {
+    filter: drop-shadow(0 0 8px #ffd700) drop-shadow(0 0 15px #d4af37);
+    animation: trace-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes trace-glow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 8px #ffd700) drop-shadow(0 0 15px #d4af37);
+    }
+
+    50% {
+        filter: drop-shadow(0 0 15px #ffd700) drop-shadow(0 0 25px #d4af37);
+    }
+}
+
+/* ============================================
+   THERMAL EFFECTS
+   ============================================ */
+
+.thermal-glow {
+    filter: drop-shadow(0 0 20px #ff4500) drop-shadow(0 0 40px #ff8c00);
+    transition: all 0.3s ease-in-out;
+}
+
+.thermal-pulse {
+    animation: thermal-breathe 2s ease-in-out infinite;
+}
+
+@keyframes thermal-breathe {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 10px #ff4500);
+        opacity: 0.8;
+    }
+
+    50% {
+        filter: drop-shadow(0 0 25px #ff4500) drop-shadow(0 0 40px #ff8c00);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   COOL DOWN EFFECTS
+   ============================================ */
+
+.cool-down {
+    fill: #00bfff;
+    filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0088ff);
+    transition: all 1s ease-out;
+}
+
+/* ============================================
+   PARTICLE ANIMATIONS
+   ============================================ */
+
+.particle-animate {
+    animation: particle-float 1.5s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes particle-float {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-60px) translateX(var(--drift, 0px));
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   RHYTHMIC PULSE (for active components)
+   ============================================ */
+
+.rhythmic-pulse {
+    animation: component-pulse 2s ease-in-out infinite;
+}
+
+@keyframes component-pulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 5px #ffd700);
+        opacity: 0.8;
+    }
+
+    50% {
+        filter: drop-shadow(0 0 15px #ffd700) drop-shadow(0 0 30px #d4af37);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   SMOOTH TRANSITIONS
+   ============================================ */
+
+.smooth-transition {
+    transition: all 0.3s ease-in-out;
+}
+
+/* ============================================
+   POWER ON EFFECTS
+   ============================================ */
+
+.power-on {
+    animation: power-surge 0.5s ease-out forwards;
+}
+
+@keyframes power-surge {
+    0% {
+        fill: #3a3530;
+        filter: none;
+    }
+
+    50% {
+        fill: #fff;
+        filter: drop-shadow(0 0 10px #fff);
+    }
+
+    100% {
+        fill: #ffd700;
+        filter: drop-shadow(0 0 5px #ffd700);
+    }
+}
+
+.power-icon {
+    animation: power-pulse 2s ease-in-out infinite;
+}
+
+@keyframes power-pulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 10px #d4af37);
+        transform: scale(1);
+    }
+
+    50% {
+        filter: drop-shadow(0 0 30px #ffd700) drop-shadow(0 0 50px #d4af37);
+        transform: scale(1.05);
+    }
+}
+
+/* ============================================
+   GLITCH TEXT EFFECT
+   ============================================ */
+
+.glitch-text {
+    position: relative;
+    animation: glitch-skew 4s infinite linear alternate-reverse;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes glitch-skew {
+    0% {
+        transform: skew(0deg);
+    }
+
+    10% {
+        transform: skew(0.5deg);
+    }
+
+    20% {
+        transform: skew(-0.5deg);
+    }
+
+    30% {
+        transform: skew(0deg);
+    }
+
+    100% {
+        transform: skew(0deg);
+    }
+}
+
+/* ============================================
+   SCANLINES OVERLAY
+   ============================================ */
+
+.scanlines {
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.3) 2px,
+            rgba(0, 0, 0, 0.3) 4px);
+    pointer-events: none;
+}
+
+/* ============================================
+   PROGRESS BAR
+   ============================================ */
+
+.progress-bar {
+    transition: width 0.1s linear;
+}
+
+/* ============================================
+   POWER ON PROMPT
+   ============================================ */
+
+.power-on-prompt {
+    animation: fade-in 1s ease-out;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   RADIAL GRADIENT UTILITY (Tailwind extension)
+   ============================================ */
+
+.bg-gradient-radial {
+    background: radial-gradient(ellipse at center, var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to));
+}
+
+/* ============================================
+   SCALE UTILITY
+   ============================================ */
+
+.scale-98 {
+    transform: scale(0.98);
+}
+
+/* ============================================
+   BOOT SEQUENCE ANIMATION
+   ============================================ */
+
+@keyframes boot-flicker {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    15% {
+        opacity: 0.5;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.boot-flicker {
+    animation: boot-flicker 0.5s ease-out forwards;
+}
+
+/* ============================================
+   VRM ACTIVE STATE
+   ============================================ */
+
+.vrm-active {
+    animation: vrm-glow 3s ease-in-out infinite;
+}
+
+@keyframes vrm-glow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 5px rgba(255, 69, 0, 0.3));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 15px rgba(255, 69, 0, 0.6)) drop-shadow(0 0 25px rgba(255, 140, 0, 0.3));
+    }
+}
+
+/* ============================================
+   HOVER CARD TRANSITIONS
+   ============================================ */
+
+.hover-card {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease-out;
+}
+
+.hover-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   DEBUG DISPLAY SEGMENT GLOW
+   ============================================ */
+
+@keyframes segment-flicker {
+
+    0%,
+    90%,
+    100% {
+        opacity: 1;
+    }
+
+    92%,
+    95% {
+        opacity: 0.5;
+    }
+}
+
+.segment-active {
+    animation: segment-flicker 0.1s ease-out;
+}
